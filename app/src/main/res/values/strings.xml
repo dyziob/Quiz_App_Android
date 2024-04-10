@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">Projekt</string>
+    <string name="app_name">Project</string>
+    <string name="login">Login</string>
+    <string name="Email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login2">Login</string>
+    <string name="register">Register</string>
+    <string name="register2">Register</string>
+    <string name="Empty_Email">Enter e-mail</string>
+    <string name="password_empty">Empty password</string>
+    <string name="login_now">Sign in!</string>
+    <string name="register_text">You already have account?</string>
+    <string name="login_text">Don\'t have account?</string>
+    <string name="register_now">Register now!</string>
+    <string name="account_created">Account created.</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="login_successful">Login successful.</string>
 </resources>
