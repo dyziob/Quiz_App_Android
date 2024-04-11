@@ -16,4 +16,6 @@
     <string name="account_created">Konto stworzone.</string>
     <string name="authentication_failed">Uwierzytelnianie nie powiodło się.</string>
     <string name="login_successful">Udane logowanie.</string>
+    <string name="topic">Wybierz kategorię</string>
+    <string name="Start">Rozpocznij Quiz</string>
 </resources>

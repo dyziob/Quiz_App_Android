@@ -5,4 +5,5 @@
     <color name="light_blue">#5358ec</color>
     <color name="button_color">#0C359E</color>
     <color name="bg_color">#867AE9</color>
+    <color name="navbar">#F3F3F3</color>
 </resources>
