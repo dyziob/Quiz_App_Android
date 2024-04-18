@@ -56,12 +56,12 @@ public class Registration extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)){
-                    Toast.makeText(Registration.this, getString(R.string.Empty_Email), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registration.this, R.string.Empty_Email, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)){
-                    Toast.makeText(Registration.this, getString(R.string.password_empty), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registration.this, R.string.password_empty, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -79,7 +79,7 @@ public class Registration extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Registration.this, getString(R.string.authentication_failed),
+                                    Toast.makeText(Registration.this, R.string.authentication_failed,
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

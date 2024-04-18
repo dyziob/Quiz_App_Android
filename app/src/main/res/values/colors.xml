@@ -2,8 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_blue">#5358ec</color>
+    <color name="light_blue">#5358EC</color>
     <color name="button_color">#0C359E</color>
     <color name="bg_color">#867AE9</color>
     <color name="navbar">#F3F3F3</color>
+    <color name="dark_tab">#0D1282</color>
 </resources>

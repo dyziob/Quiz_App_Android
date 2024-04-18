@@ -18,4 +18,10 @@
     <string name="login_successful">Udane logowanie.</string>
     <string name="topic">Wybierz kategorię</string>
     <string name="Start">Rozpocznij Quiz</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="TopicNoSelect">Proszę wybierz kategorię</string>
+    <string name="next">Następne</string>
+    <string name="PhoneUsed">Koło ratunkowe telefonu zostało już wykorzystane!</string>
+    <string name="SmsUsed">Koło ratunkowe SMS zostało już wykorzystane!</string>
+    <string name="time_over">Koniec Czasu</string>
 </resources>

@@ -7,9 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projekt.Repository.Login;
 import com.google.android.gms.ads.AdRequest;
@@ -23,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String selectedTopicName = "";
     FirebaseAuth auth;
     ImageButton button;
     TextView textView;
@@ -31,8 +37,82 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        final LinearLayout android = findViewById(R.id.android);
+        final LinearLayout java = findViewById(R.id.java);
+        final LinearLayout kotlin = findViewById(R.id.kotlin);
+        final LinearLayout csharp = findViewById(R.id.csharp);
+
+        final Button startbtn = findViewById(R.id.start);
+
+        android.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedTopicName= "Android";
+
+                android.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                java.setBackgroundResource(R.drawable.round_back_white10);
+                kotlin.setBackgroundResource(R.drawable.round_back_white10);
+                csharp.setBackgroundResource(R.drawable.round_back_white10);
+            }
+        });
+
+        java.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedTopicName= "Java";
+
+                android.setBackgroundResource(R.drawable.round_back_white10);
+                java.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                kotlin.setBackgroundResource(R.drawable.round_back_white10);
+                csharp.setBackgroundResource(R.drawable.round_back_white10);
+            }
+        });
+
+        kotlin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedTopicName= "Kotlin";
+
+                android.setBackgroundResource(R.drawable.round_back_white10);
+                java.setBackgroundResource(R.drawable.round_back_white10);
+                kotlin.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                csharp.setBackgroundResource(R.drawable.round_back_white10);
+            }
+        });
+
+        csharp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedTopicName= "C#";
+
+                android.setBackgroundResource(R.drawable.round_back_white10);
+                java.setBackgroundResource(R.drawable.round_back_white10);
+                kotlin.setBackgroundResource(R.drawable.round_back_white10);
+                csharp.setBackgroundResource(R.drawable.round_back_white_stroke10);
+            }
+        });
+
+        //start quiz button
+        startbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedTopicName.isEmpty()){
+                    Toast.makeText(MainActivity.this, getString(R.string.TopicNoSelect), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+                    intent.putExtra("SelectedTopic", selectedTopicName);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        //Admob banner code
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -48,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         // on below line loading request inside our adview.
         adView.loadAd(adRequest);
 
+        //logout
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.settingsButton);
         textView = findViewById(R.id.user_details);
@@ -61,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(user.getEmail());
         }
 
+        //setting button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

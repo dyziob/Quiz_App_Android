@@ -72,6 +72,7 @@
         android:weightSum="2">
 
             <LinearLayout
+                android:id="@+id/android"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -97,6 +98,7 @@
                     android:textStyle="bold"/>
             </LinearLayout>
         <LinearLayout
+            android:id="@+id/java"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -135,6 +137,7 @@
         android:weightSum="2">
 
         <LinearLayout
+            android:id="@+id/kotlin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -160,6 +163,7 @@
                 android:textStyle="bold"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/csharp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
