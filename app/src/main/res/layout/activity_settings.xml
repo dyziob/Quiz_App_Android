@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity"
+    style="@style/Background_Color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        style="@style/Navbar">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            style="@style/back_button" />
+
+        <TextView
+            android:id="@+id/Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/settings"
+            style="@style/Text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        style="@style/profile_pic" />
+
+    <TextView
+        android:id="@+id/user_details"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_below="@id/profileImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:elevation="1dp"
+        android:gravity="center"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="email here..."
+        style="@style/Text"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <!-- Przycisk "Znajdź graczy" -->
+    <Button
+        android:id="@+id/findPlayersButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/darkModeSwitch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:minWidth="200dp"
+        style="@style/settings_button"
+        android:text="@string/findplayers" />
+
+    <!-- Przełącznik Dark Mode -->
+    <Switch
+        android:id="@+id/darkModeSwitch"
+        android:layout_width="wrap_content"
+        android:minWidth="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_details"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:minHeight="48dp"
+        android:paddingTop="10dp"
+        style="@style/Text"
+        android:text="@string/darkmode"
+        android:textSize="18sp"
+        android:thumbTint="@color/switch_thumb_selector"
+        android:trackTint="@color/switch_track_selector"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+    <!-- Przycisk "Wyloguj" -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/findPlayersButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        style="@style/settings_button"
+        android:minWidth="200dp"
+        android:text="@string/logout" />
+
+
+</RelativeLayout>

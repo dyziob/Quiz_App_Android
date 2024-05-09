@@ -24,4 +24,8 @@
     <string name="PhoneUsed">Koło ratunkowe telefonu zostało już wykorzystane!</string>
     <string name="SmsUsed">Koło ratunkowe SMS zostało już wykorzystane!</string>
     <string name="time_over">Koniec Czasu</string>
+    <string name="settings">Ustawienia Aplikacji</string>
+    <string name="darkmode">Tryb Ciemny</string>
+    <string name="logout">Wyloguj</string>
+    <string name="findplayers">Znajdź Graczy</string>
 </resources>

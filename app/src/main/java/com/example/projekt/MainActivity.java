@@ -2,8 +2,11 @@ package com.example.projekt;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,14 +36,21 @@ public class MainActivity extends AppCompatActivity {
     ImageButton button;
     TextView textView;
     FirebaseUser user;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean nightMODE = sharedPreferences.getBoolean("night", false);
+
+        if (nightMODE) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         final LinearLayout android = findViewById(R.id.android);
         final LinearLayout java = findViewById(R.id.java);
@@ -54,10 +64,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectedTopicName= "Android";
 
-                android.setBackgroundResource(R.drawable.round_back_white_stroke10);
-                java.setBackgroundResource(R.drawable.round_back_white10);
-                kotlin.setBackgroundResource(R.drawable.round_back_white10);
-                csharp.setBackgroundResource(R.drawable.round_back_white10);
+                if (nightMODE) {
+                    android.setBackgroundResource(R.drawable.round_back_dark_stroke10);
+                    java.setBackgroundResource(R.drawable.round_back_dark10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_dark10);
+                    csharp.setBackgroundResource(R.drawable.round_back_dark10);
+                } else {
+                    android.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                    java.setBackgroundResource(R.drawable.round_back_white10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_white10);
+                    csharp.setBackgroundResource(R.drawable.round_back_white10);
+                }
+
             }
         });
 
@@ -66,10 +84,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectedTopicName= "Java";
 
-                android.setBackgroundResource(R.drawable.round_back_white10);
-                java.setBackgroundResource(R.drawable.round_back_white_stroke10);
-                kotlin.setBackgroundResource(R.drawable.round_back_white10);
-                csharp.setBackgroundResource(R.drawable.round_back_white10);
+                if (nightMODE) {
+                    android.setBackgroundResource(R.drawable.round_back_dark10);
+                    java.setBackgroundResource(R.drawable.round_back_dark_stroke10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_dark10);
+                    csharp.setBackgroundResource(R.drawable.round_back_dark10);
+                } else {
+                    android.setBackgroundResource(R.drawable.round_back_white10);
+                    java.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_white10);
+                    csharp.setBackgroundResource(R.drawable.round_back_white10);
+                }
             }
         });
 
@@ -78,10 +103,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectedTopicName= "Kotlin";
 
-                android.setBackgroundResource(R.drawable.round_back_white10);
-                java.setBackgroundResource(R.drawable.round_back_white10);
-                kotlin.setBackgroundResource(R.drawable.round_back_white_stroke10);
-                csharp.setBackgroundResource(R.drawable.round_back_white10);
+                if (nightMODE) {
+                    android.setBackgroundResource(R.drawable.round_back_dark10);
+                    java.setBackgroundResource(R.drawable.round_back_dark10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_dark_stroke10);
+                    csharp.setBackgroundResource(R.drawable.round_back_dark10);
+                } else {
+                    android.setBackgroundResource(R.drawable.round_back_white10);
+                    java.setBackgroundResource(R.drawable.round_back_white10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                    csharp.setBackgroundResource(R.drawable.round_back_white10);
+                }
             }
         });
 
@@ -90,10 +122,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectedTopicName= "C#";
 
-                android.setBackgroundResource(R.drawable.round_back_white10);
-                java.setBackgroundResource(R.drawable.round_back_white10);
-                kotlin.setBackgroundResource(R.drawable.round_back_white10);
-                csharp.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                if (nightMODE) {
+                    android.setBackgroundResource(R.drawable.round_back_dark10);
+                    java.setBackgroundResource(R.drawable.round_back_dark10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_dark10);
+                    csharp.setBackgroundResource(R.drawable.round_back_dark_stroke10);
+                } else {
+                    android.setBackgroundResource(R.drawable.round_back_white10);
+                    java.setBackgroundResource(R.drawable.round_back_white10);
+                    kotlin.setBackgroundResource(R.drawable.round_back_white10);
+                    csharp.setBackgroundResource(R.drawable.round_back_white_stroke10);
+                }
             }
         });
 
@@ -146,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                /*FirebaseAuth.getInstance().signOut();*/
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(intent);
                 finish();
             }

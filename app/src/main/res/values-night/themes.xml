@@ -2,6 +2,89 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Projekt" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/dark_white</item> <!-- Ustawia kolor podstawowy na biały w trybie ciemnym -->
+        <item name="colorOnPrimary">@color/dark_black</item> <!-- Ustawia kolor tekstu na czarny na tle podstawowym w trybie ciemnym -->
+        <item name="colorSecondary">@color/dark_light_blue</item> <!-- Ustawia kolor drugorzdny na jasnoniebieski w trybie ciemnym -->
+        <item name="colorOnSecondary">@color/dark_black</item> <!-- Ustawia kolor tekstu na czarny na tle drugorzędnym w trybie ciemnym -->
+        <item name="android:windowBackground">@color/dark_bg_color</item> <!-- Ustawia kolor tła okna na kolor zdefiniowany jako dark_bg_color w trybie ciemnym -->
+        <item name="android:navigationBarColor">@color/dark_navbar</item> <!-- Ustawia kolor paska nawigacyjnego na kolor zdefiniowany jako dark_navbar w trybie ciemnym -->
+        <item name="android:statusBarColor">@color/dark_dark_tab</item> <!-- Ustawia kolor paska stanu na kolor zdefiniowany jako dark_dark_tab w trybie ciemnym -->
     </style>
+
+    <style name="Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="card">
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="Navbar">
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="profile_pic">
+        <item name="android:src">@drawable/ic_profilepic_dark</item>
+    </style>
+
+    <style name="Text_white">
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="Background_Color">
+        <item name="android:background">@color/dark_bg_color</item>
+    </style>
+
+    <style name="back_button">
+        <item name="android:src">@drawable/ic_back_btn_dark</item>
+    </style>
+
+    <style name="settings_button">
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="progressBar">
+        <item name="android:indeterminateTint">@color/dark_black</item>
+    </style>
+
+    <style name="settings_icon">
+        <item name="android:src">@drawable/ic_settings_dark</item>
+    </style>
+
+    <style name="quiz_card">
+        <item name="android:background">@drawable/round_back_dark10</item>
+    </style>
+
+    <style name="qestions">
+        <item name="android:background">@drawable/round_back_dark10</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="quiz_card_text">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="timer">
+        <item name="android:src">@drawable/ic_timer_dark</item>
+    </style>
+
+    <style name="phone">
+        <item name="android:src">@drawable/ic_phone_dark</item>
+    </style>
+
+    <style name="sms">
+        <item name="android:src">@drawable/ic_sms_dark</item>
+    </style>
+
+    <style name="question_button">
+        <item name="android:background">@drawable/round_back_dark_stroke2_10</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="questions_tab">
+        <item name="android:background">@drawable/round_back_dark_beige0</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

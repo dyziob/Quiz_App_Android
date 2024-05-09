@@ -2,8 +2,11 @@ package com.example.projekt.Repository;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +32,8 @@ public class Login extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
 
+    SharedPreferences sharedPreferences;
+
 
     @Override
     public void onStart() {
@@ -50,6 +55,14 @@ public class Login extends AppCompatActivity {
         buttonLog = findViewById(R.id.loginbtn);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.register_now);
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean nightMODE = sharedPreferences.getBoolean("night", false);
+
+        if (nightMODE) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

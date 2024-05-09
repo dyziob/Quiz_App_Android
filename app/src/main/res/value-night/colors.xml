@@ -8,7 +8,6 @@
     <color name="bg_color">#867AE9</color>
     <color name="navbar">#F3F3F3</color>
     <color name="dark_tab">#0D1282</color>
-    <color name="grey">#808080</color>
 
     <!-- Kolory dla trybu ciemnego -->
     <color name="dark_black">#FFFFFFFF</color>
@@ -16,6 +15,6 @@
     <color name="dark_light_blue">#9497FF</color>
     <color name="dark_button_color">#3759FF</color>
     <color name="dark_bg_color">#2E2A57</color>
-    <color name="dark_navbar">#1A1A1A</color>
+    <color name="dark_navbar">#434343</color>
     <color name="dark_dark_tab">#7C82E8</color>
 </resources>
