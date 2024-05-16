@@ -28,4 +28,6 @@
     <string name="darkmode">Tryb Ciemny</string>
     <string name="logout">Wyloguj</string>
     <string name="findplayers">Znajdź Graczy</string>
+    <string name="NoAnswerSelect">Proszę wybrać odpowiedź</string>
+    <string name="Submit">Prześlij odpowiedzi</string>
 </resources>
