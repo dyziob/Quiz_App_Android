@@ -269,10 +269,13 @@ public class QuizActivity extends AppCompatActivity {
             option4.setText(questionsLists.get(currnetQuestionPosition).getOption4());
         }
         else{
+            quizTimer.purge();
+            quizTimer.cancel();
             Intent intent = new Intent(QuizActivity.this, QuizSummaryActivity.class);
             intent.putExtra(getString(R.string.correct), getCorrectAnswers());
             intent.putExtra(getString(R.string.incorrect), getInCorrectAnswers());
             startActivity(intent);
+
 
             finish();
         }
