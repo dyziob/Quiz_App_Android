@@ -30,5 +30,11 @@
     <string name="NoAnswerSelect">Please select an option</string>
     <string name="Submit">Submit Quiz\n</string>
     <string name="correct">Correct\n</string>
-    <string name="incorrect">incorrect\n</string>
+    <string name="incorrect">Incorrect\n</string>
+    <string name="correct_answers">Correct Answers: %d</string>
+    <string name="incorrect_answers">Incorrect Answers: %d</string>
+    <string name="random_player_results">Players Results</string>
+    <string name="player_result">%s\nC: %d, I: %d</string>
+    <string name="back_to_main">Back to Main</string>
+    <string name="quiz_summary">Quiz Statistics</string>
 </resources>

@@ -74,11 +74,11 @@ public class QuizActivity extends AppCompatActivity {
         startTimer(timer);
 
         questions_number.setText((currnetQuestionPosition+1)+"/"+questionsLists.size());
-        question.setText(questionsLists.get(0).getQuestion());
-        option1.setText(questionsLists.get(0).getOption1());
-        option2.setText(questionsLists.get(0).getOption2());
-        option3.setText(questionsLists.get(0).getOption3());
-        option4.setText(questionsLists.get(0).getOption4());
+        question.setText(questionsLists.get(currnetQuestionPosition).getQuestion());
+        option1.setText(questionsLists.get(currnetQuestionPosition).getOption1());
+        option2.setText(questionsLists.get(currnetQuestionPosition).getOption2());
+        option3.setText(questionsLists.get(currnetQuestionPosition).getOption3());
+        option4.setText(questionsLists.get(currnetQuestionPosition).getOption4());
         option1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,6 +223,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void changeNextQuestions(){
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean nightMODE = sharedPreferences.getBoolean("night", false);
         currnetQuestionPosition++;
 
         if((currnetQuestionPosition+1) == questionsLists.size()){
@@ -232,27 +234,42 @@ public class QuizActivity extends AppCompatActivity {
         if(currnetQuestionPosition < questionsLists.size()){
             selectedOptionByUser = "";
 
-            option1.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
-            option1.setTextColor(Color.parseColor("#1F6BB8"));
+            if (nightMODE) {
+                option1.setBackgroundResource(R.drawable.round_back_dark_stroke2_10);
+                option1.setTextColor(Color.WHITE);
 
-            option2.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
-            option2.setTextColor(Color.parseColor("#1F6BB8"));
+                option2.setBackgroundResource(R.drawable.round_back_dark_stroke2_10);
+                option2.setTextColor(Color.WHITE);
 
-            option3.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
-            option3.setTextColor(Color.parseColor("#1F6BB8"));
+                option3.setBackgroundResource(R.drawable.round_back_dark_stroke2_10);
+                option3.setTextColor(Color.WHITE);
 
-            option4.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
-            option4.setTextColor(Color.parseColor("#1F6BB8"));
+                option4.setBackgroundResource(R.drawable.round_back_dark_stroke2_10);
+                option4.setTextColor(Color.WHITE);
+            } else {
+                option1.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
+                option1.setTextColor(Color.BLACK);
+
+                option2.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
+                option2.setTextColor(Color.BLACK);
+
+                option3.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
+                option3.setTextColor(Color.BLACK);
+
+                option4.setBackgroundResource(R.drawable.round_back_white_stroke2_10);
+                option4.setTextColor(Color.BLACK);
+            }
+
 
             questions_number.setText((currnetQuestionPosition+1)+"/"+questionsLists.size());
-            question.setText(questionsLists.get(0).getQuestion());
+            question.setText(questionsLists.get(currnetQuestionPosition).getQuestion());
             option1.setText(questionsLists.get(currnetQuestionPosition).getOption1());
             option2.setText(questionsLists.get(currnetQuestionPosition).getOption2());
             option3.setText(questionsLists.get(currnetQuestionPosition).getOption3());
             option4.setText(questionsLists.get(currnetQuestionPosition).getOption4());
         }
         else{
-            Intent intent = new Intent(QuizActivity.this, QuizResults.class);
+            Intent intent = new Intent(QuizActivity.this, QuizSummaryActivity.class);
             intent.putExtra(getString(R.string.correct), getCorrectAnswers());
             intent.putExtra(getString(R.string.incorrect), getInCorrectAnswers());
             startActivity(intent);
@@ -274,7 +291,7 @@ public class QuizActivity extends AppCompatActivity {
 
                     Toast.makeText(QuizActivity.this, R.string.time_over, Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(QuizActivity.this, QuizResults.class);
+                    Intent intent = new Intent(QuizActivity.this, QuizSummaryActivity.class);
                     intent.putExtra("correct", getCorrectAnswers());
                     intent.putExtra("incorrect", getInCorrectAnswers());
                     startActivity(intent);
@@ -359,7 +376,5 @@ public class QuizActivity extends AppCompatActivity {
             option4.setBackgroundResource(R.drawable.round_back_green10);
             option4.setTextColor(Color.WHITE);
         }
-
-
     }
 }

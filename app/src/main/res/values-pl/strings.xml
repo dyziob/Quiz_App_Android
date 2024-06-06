@@ -30,4 +30,12 @@
     <string name="findplayers">Znajdź Graczy</string>
     <string name="NoAnswerSelect">Proszę wybrać odpowiedź</string>
     <string name="Submit">Prześlij odpowiedzi</string>
+    <string name="correct">Poprawna</string>
+    <string name="incorrect">Niepoprawna</string>
+    <string name="correct_answers">Poprawne Odpowiedzi: %d</string>
+    <string name="incorrect_answers">Niepoprawne Odpowiedzi: %d</string>
+    <string name="random_player_results">Wyniki Graczy</string>
+    <string name="player_result">%s\nP: %d, N: %d</string>
+    <string name="back_to_main">Powrót do Menu</string>
+    <string name="quiz_summary">Statystyki Quiz\'u</string>
 </resources>

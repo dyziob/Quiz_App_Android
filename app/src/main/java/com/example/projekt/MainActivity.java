@@ -3,25 +3,23 @@ package com.example.projekt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projekt.Repository.Login;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -31,12 +29,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_ENABLE_BT = 1;
     private String selectedTopicName = "";
     FirebaseAuth auth;
-    ImageButton button;
     TextView textView;
     FirebaseUser user;
     SharedPreferences sharedPreferences;
+    BluetoothAdapter bluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         android.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedTopicName= "Android";
+                selectedTopicName = "Android";
 
                 if (nightMODE) {
                     android.setBackgroundResource(R.drawable.round_back_dark_stroke10);
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         java.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedTopicName= "Java";
+                selectedTopicName = "Java";
 
                 if (nightMODE) {
                     android.setBackgroundResource(R.drawable.round_back_dark10);
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         kotlin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedTopicName= "Kotlin";
+                selectedTopicName = "Kotlin";
 
                 if (nightMODE) {
                     android.setBackgroundResource(R.drawable.round_back_dark10);
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         csharp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedTopicName= "C#";
+                selectedTopicName = "C#";
 
                 if (nightMODE) {
                     android.setBackgroundResource(R.drawable.round_back_dark10);
@@ -136,14 +135,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize BluetoothAdapter
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        // Add long click listeners for sharing via Bluetooth
+        android.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                shareTopicViaBluetooth("Android");
+                return true;
+            }
+        });
+
+        java.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                shareTopicViaBluetooth("Java");
+                return true;
+            }
+        });
+
+        kotlin.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                shareTopicViaBluetooth("Kotlin");
+                return true;
+            }
+        });
+
+        csharp.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                shareTopicViaBluetooth("C#");
+                return true;
+            }
+        });
+
         //start quiz button
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedTopicName.isEmpty()){
+                if (selectedTopicName.isEmpty()) {
                     Toast.makeText(MainActivity.this, getString(R.string.TopicNoSelect), Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Intent intent = new Intent(MainActivity.this, QuizActivity.class);
                     intent.putExtra("SelectedTopic", selectedTopicName);
                     startActivity(intent);
@@ -169,20 +203,18 @@ public class MainActivity extends AppCompatActivity {
 
         //logout
         auth = FirebaseAuth.getInstance();
-        button = findViewById(R.id.settingsButton);
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
-        if(user == null){
+        if (user == null) {
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
-        }
-        else {
+        } else {
             textView.setText(user.getEmail());
         }
 
         //setting button
-        button.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*FirebaseAuth.getInstance().signOut();*/
@@ -192,5 +224,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-}
 
+    private void shareTopicViaBluetooth(String topicName) {
+        if (bluetoothAdapter == null) {
+            Toast.makeText(this, "Bluetooth is not supported on this device", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, "Check out this quiz on " + topicName + "!");
+            intent.setPackage("com.android.bluetooth"); // Ensure the intent is sent via Bluetooth
+            startActivity(Intent.createChooser(intent, "Share via"));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_OK) {
+            Toast.makeText(this, "Bluetooth enabled", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_CANCELED) {
+            Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

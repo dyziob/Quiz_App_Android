@@ -50,7 +50,7 @@ public class QuestionsBank {
         final List<QuestionsList> questionsLists = new ArrayList<>();
 
         final QuestionsList question1 = new QuestionsList("Który z typów danych w Kotlinie jest uważany za typ prymitywny?", "Int", "String", "Integer", "Double", "Int", "");
-        final QuestionsList question2 = new QuestionsList("Który operator jest używany do porównywania dwóch wartości w Kotlinie?", "==", "=", "!=", "<>", "===", "");
+        final QuestionsList question2 = new QuestionsList("Który operator jest używany do porównywania dwóch wartości w Kotlinie?", "==", "=", "!=", "<>", "==", "");
         final QuestionsList question3 = new QuestionsList("Która z poniższych kolekcji w Kotlinie zapewnia szybkie wstawianie i pobieranie elementów?", "ArrayList", "LinkedList", "HashSet", "HashMap", "ArrayList", "");
         final QuestionsList question4 = new QuestionsList("Która z poniższych metod jest używana do rozpoczęcia wykonywania nowego wątku w Kotlinie?", "startThread()", "runThread()", "begin()", "start()", "start()", "");
         final QuestionsList question5 = new QuestionsList("Który znak w Kotlinie jest używany do oznaczania opcjonalnych wartości (nullable)?", "?", "!", ".", ":", "?", "");
@@ -69,7 +69,7 @@ public class QuestionsBank {
         final List<QuestionsList> questionsLists = new ArrayList<>();
 
         final QuestionsList question1 = new QuestionsList("Który z typów danych w C# jest uważany za typ prymitywny?", "int", "string", "Integer", "double", "int", "");
-        final QuestionsList question2 = new QuestionsList("Który operator jest używany do porównywania dwóch wartości w C#?", "==", "=", "!=", "<>", "===", "");
+        final QuestionsList question2 = new QuestionsList("Który operator jest używany do porównywania dwóch wartości w C#?", "==", "=", "!=", "<>", "==", "");
         final QuestionsList question3 = new QuestionsList("Która z poniższych kolekcji w C# zapewnia szybkie wstawianie i pobieranie elementów?", "List", "LinkedList", "HashSet", "Dictionary", "List", "");
         final QuestionsList question4 = new QuestionsList("Która z poniższych metod jest używana do rozpoczęcia wykonywania nowego wątku w C#?", "startThread()", "runThread()", "begin()", "Start()", "Start()", "");
         final QuestionsList question5 = new QuestionsList("Która z poniższych struktur danych w C# jest niemutowalna?", "List", "ArrayList", "HashSet", "ImmutableList", "ImmutableList", "");
@@ -85,11 +85,11 @@ public class QuestionsBank {
 
     public static List<QuestionsList> getQuestions(String selectedTopicName) {
         switch(selectedTopicName){
-            case "java":
+            case "Java":
                 return javaQuestions();
-            case "android":
+            case "Android":
                 return androidQuestions();
-            case "kotlin":
+            case "Kotlin":
                 return kotlinQuestions();
             default:
                 return csharpQuestions();
