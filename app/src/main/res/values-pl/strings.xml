@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Projekt</string>
+    <string name="login">Logowanie</string>
+    <string name="Email">E-mail</string>
+    <string name="password">Hasło</string>
+    <string name="login2">Zaloguj</string>
+    <string name="register">Rejestracja</string>
+    <string name="register2">Zarejestruj się</string>
+    <string name="Empty_Email">Wprowadź e-mail</string>
+    <string name="password_empty">Wprowadź hasło</string>
+    <string name="login_now">Zaloguj się!</string>
+    <string name="register_text">Masz juz konto?</string>
+    <string name="login_text">Nie posiadasz konta?</string>
+    <string name="register_now">Zarejestruj się!</string>
+    <string name="account_created">Konto stworzone.</string>
+    <string name="authentication_failed">Uwierzytelnianie nie powiodło się.</string>
+    <string name="login_successful">Udane logowanie.</string>
+    <string name="topic">Wybierz kategorię</string>
+    <string name="Start">Rozpocznij Quiz</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="TopicNoSelect">Proszę wybierz kategorię</string>
+    <string name="next">Następne</string>
+    <string name="PhoneUsed">Koło ratunkowe telefonu zostało już wykorzystane!</string>
+    <string name="SmsUsed">Koło ratunkowe SMS zostało już wykorzystane!</string>
+    <string name="time_over">Koniec Czasu</string>
+    <string name="settings">Ustawienia Aplikacji</string>
+    <string name="darkmode">Tryb Ciemny</string>
+    <string name="logout">Wyloguj</string>
+    <string name="findplayers">Znajdź Graczy</string>
+    <string name="NoAnswerSelect">Proszę wybrać odpowiedź</string>
+    <string name="Submit">Prześlij odpowiedzi</string>
+    <string name="correct">Poprawna</string>
+    <string name="incorrect">Niepoprawna</string>
+    <string name="correct_answers">Poprawne Odpowiedzi: %d</string>
+    <string name="incorrect_answers">Niepoprawne Odpowiedzi: %d</string>
+    <string name="random_player_results">Wyniki Graczy</string>
+    <string name="player_result">%s\nP: %d, N: %d</string>
+    <string name="back_to_main">Powrót do Menu</string>
+    <string name="quiz_summary">Statystyki Quiz\'u</string>
+</resources>
