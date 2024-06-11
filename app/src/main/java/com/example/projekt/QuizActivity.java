@@ -68,17 +68,22 @@ public class QuizActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.nextBtn);
         final String getSelectedTopicName = getIntent().getStringExtra("SelectedTopic");
 
+        // Ustawienie nazwy wybranego tematu
         selectedTopicName.setText(getSelectedTopicName);
         questionsLists = QuestionsBank.getQuestions(getSelectedTopicName);
 
+        // Uruchomienie timera
         startTimer(timer);
 
+        // Ustawienie pierwszego pytania i opcji odpowiedzi
         questions_number.setText((currnetQuestionPosition+1)+"/"+questionsLists.size());
         question.setText(questionsLists.get(currnetQuestionPosition).getQuestion());
         option1.setText(questionsLists.get(currnetQuestionPosition).getOption1());
         option2.setText(questionsLists.get(currnetQuestionPosition).getOption2());
         option3.setText(questionsLists.get(currnetQuestionPosition).getOption3());
         option4.setText(questionsLists.get(currnetQuestionPosition).getOption4());
+
+        // Obsługa kliknięcia na opcję 1
         option1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +100,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // Obsługa kliknięcia na opcję 2
         option2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +117,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // Obsługa kliknięcia na opcję 3
         option3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +134,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // Obsługa kliknięcia na opcję 4
         option4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +151,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // Obsługa kliknięcia przycisku "Dalej"
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +164,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        //back button
+        // Obsługa kliknięcia przycisku "Wstecz"
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +176,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        //new onBackPressed
+        // Nowa obsługa przycisku "Wstecz"
         onBackPressedDispatcher.addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -179,13 +188,13 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        // Phone Button
+        // Przycisk telefonu
         ImageView phoneButton = findViewById(R.id.phoneButton);
         phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!phoneUsed) {
-                    // Open contacts application
+                    // Otwórz aplikację kontaktów
                     openContacts();
                     phoneUsed = true;
                 } else {
@@ -194,13 +203,13 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        // SMS Button
+        // Przycisk SMS
         ImageView smsButton = findViewById(R.id.smsButton);
         smsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!smsUsed) {
-                    // Compose a new SMS
+                    // Komponuj nowy SMS
                     composeSMS();
                     smsUsed = true;
                 } else {
@@ -210,18 +219,19 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
-    // Method to open contacts application
+    // Metoda otwierająca aplikację kontaktów
     private void openContacts() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people"));
         startActivity(intent);
     }
 
-    // Method to compose a new SMS
+    // Metoda komponująca nowy SMS
     private void composeSMS() {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"));
         startActivity(intent);
     }
 
+    // Metoda zmieniająca pytanie na następne
     private void changeNextQuestions(){
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         boolean nightMODE = sharedPreferences.getBoolean("night", false);
@@ -260,7 +270,7 @@ public class QuizActivity extends AppCompatActivity {
                 option4.setTextColor(Color.BLACK);
             }
 
-
+            // Ustawienie kolejnego pytania i opcji odpowiedzi
             questions_number.setText((currnetQuestionPosition+1)+"/"+questionsLists.size());
             question.setText(questionsLists.get(currnetQuestionPosition).getQuestion());
             option1.setText(questionsLists.get(currnetQuestionPosition).getOption1());
@@ -276,11 +286,11 @@ public class QuizActivity extends AppCompatActivity {
             intent.putExtra(getString(R.string.incorrect), getInCorrectAnswers());
             startActivity(intent);
 
-
             finish();
         }
     }
-    //Timer
+
+    // Timer
     private void startTimer(TextView timerTextView){
         quizTimer = new Timer();
 
@@ -329,11 +339,11 @@ public class QuizActivity extends AppCompatActivity {
         },1000,1000);
     }
 
+    // Metoda licząca poprawne odpowiedzi
     private int getCorrectAnswers(){
         int correctAnswers = 0;
 
         for(int i=0; i<questionsLists.size(); i++){
-
             final String getUserSelectedAnswer = questionsLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionsLists.get(i).getAnswer();
 
@@ -345,22 +355,23 @@ public class QuizActivity extends AppCompatActivity {
         return correctAnswers;
     }
 
+    // Metoda licząca niepoprawne odpowiedzi
     private int getInCorrectAnswers(){
-        int correctAnswers = 0;
+        int incorrectAnswers = 0;
 
         for(int i=0; i<questionsLists.size(); i++){
-
             final String getUserSelectedAnswer = questionsLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionsLists.get(i).getAnswer();
 
             if(!getUserSelectedAnswer.equals(getAnswer)){
-                correctAnswers++;
+                incorrectAnswers++;
             }
         }
 
-        return correctAnswers;
+        return incorrectAnswers;
     }
 
+    // Metoda ujawniająca poprawną odpowiedź
     private void revealAnswer() {
         final String getAnswer = questionsLists.get(currnetQuestionPosition).getAnswer();
         if (option1.getText().toString().equals(getAnswer)) {

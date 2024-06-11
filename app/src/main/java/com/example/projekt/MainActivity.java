@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         boolean nightMODE = sharedPreferences.getBoolean("night", false);
 
+        // Ustawienie trybu nocnego na podstawie preferencji
         if (nightMODE) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button startbtn = findViewById(R.id.start);
 
+        // Ustawienia kliknięcia dla wyboru tematu Android
         android.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
                     kotlin.setBackgroundResource(R.drawable.round_back_white10);
                     csharp.setBackgroundResource(R.drawable.round_back_white10);
                 }
-
             }
         });
 
+        // Ustawienia kliknięcia dla wyboru tematu Java
         java.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Ustawienia kliknięcia dla wyboru tematu Kotlin
         kotlin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Ustawienia kliknięcia dla wyboru tematu C#
         csharp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,10 +139,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize BluetoothAdapter
+        // Inicjalizacja BluetoothAdapter
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        // Add long click listeners for sharing via Bluetooth
+        // Dodanie obsługi długiego kliknięcia dla udostępniania poprzez Bluetooth
         android.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //start quiz button
+        // Przycisk rozpoczęcia quizu
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,23 +189,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Admob banner code
+        // Kod do bannera Admob
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
-                // on below line displaying a log that admob ads has been initialized.
+                // Logowanie inicjalizacji Admob
                 Log.i("Admob", "Admob Initialized.");
             }
         });
 
-        // on below line creating and initializing variable for adView.
+        // Inicjalizacja AdView i AdRequest
         AdView adView = findViewById(R.id.adView);
-        // on below line creating and initializing variable for adRequest
         AdRequest adRequest = new AdRequest.Builder().build();
-        // on below line loading request inside our adview.
         adView.loadAd(adRequest);
 
-        //logout
+        // Logowanie użytkownika
         auth = FirebaseAuth.getInstance();
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
@@ -213,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(user.getEmail());
         }
 
-        //setting button
+        // Przycisk ustawień
         findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,41 +227,43 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Metoda do udostępniania tematu poprzez Bluetooth
     private void shareTopicViaBluetooth(String topicName) {
         if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth is not supported on this device", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bluetooth nie jest wspierany na tym urządzeniu", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
+                // TODO: Rozważ wywołanie
                 //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
+                // tutaj, aby zażądać brakujących uprawnień, a następnie zastąpienie
                 //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
                 //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+                // aby obsłużyć przypadek, w którym użytkownik przyzna uprawnienia. Zobacz dokumentację
+                // dla ActivityCompat#requestPermissions, aby uzyskać więcej szczegółów.
                 return;
             }
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         } else {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, "Check out this quiz on " + topicName + "!");
-            intent.setPackage("com.android.bluetooth"); // Ensure the intent is sent via Bluetooth
-            startActivity(Intent.createChooser(intent, "Share via"));
+            intent.putExtra(Intent.EXTRA_TEXT, "Sprawdź ten quiz na temat " + topicName + "!");
+            intent.setPackage("com.android.bluetooth"); // Upewnij się, że intent jest wysyłany przez Bluetooth
+            startActivity(Intent.createChooser(intent, "Udostępnij przez"));
         }
     }
 
+    // Obsługa wyników aktywności
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_OK) {
-            Toast.makeText(this, "Bluetooth enabled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bluetooth włączony", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_CANCELED) {
-            Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bluetooth nie został włączony", Toast.LENGTH_SHORT).show();
         }
     }
 }
